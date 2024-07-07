@@ -1,0 +1,52 @@
+{
+  "data": {
+    "temp": {
+    },
+    "wind": {
+      "speed": {
+      },
+    },
+    "rain": {
+      "total": 128.4,
+      "current": {
+        "day": 0,
+        "storm": 18,
+        "rate": 0
+      },
+      "storm": 10.6,
+      "month": 128.4,
+      "year": 128.4
+    },
+    "humidity": {
+      "inside": 68.7,
+      "airQuality": 76.5
+    },
+    "barometer": {
+      "pressure": 29.433,
+      "trend": 0.026
+    },
+    "localForecast": {
+      "sunrise": "5:22 AM",
+      "sunset": "6:34 PM"
+    },
+    "thwIndex": 34.17,
+    "thswIndex": 33.67,
+    "insideTempHum": {
+      "temp": 31.56,
+      "humidity": 68.7
+    },
+    "airQuality": {
+      "currentAQI": 42.85624,
+      "index": "India CPCB National AQI",
+      "particulateMatter": {
+        "pm1": 14.514286,
+        "pm2p5": 19.62857,
+        "pm10": 22.585714
+      },
+      "aqi_1hour": 40.371174,
+      "aqi_nowcast": 42.85624,
+      "aqi_24hour": 32.714283
+    },
+    "evapotranspiration": {}
+  }
+}
