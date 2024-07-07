@@ -304,22 +304,6 @@
 
     <!-- weather dashboard script  -->
     <script>
-
-        document.getElementById("admin").onclick = async() => {
-            try {
-                const response = await axios.get("/users", {
-                    headers: {
-                        token: window.localStorage.getItem("token")
-                    }
-                })
-                const adminHtml = response.data;
-                document.body.innerHTML = "";
-                document.body.innerHTML = adminHtml;
-            } catch (error) {
-                console.log(error);
-            }
-        }
-
         const getBarometerData = async(currentDate) => {
             try {
                 const response = await axios.get(

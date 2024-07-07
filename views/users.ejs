@@ -84,11 +84,12 @@
     <!-- weather dashboard script  -->
     <script>
 
-
+        console.log("ji admin")
         const getCurrentData = async() => {
             try {
                 await axios.get("/api/users").then((response) => {
                 const data = response.data.msg;
+                console.log(data)
                 data.map((user, i) => {
                     createRow("prim", [user._id,user.username || "not assigned", user.email, user.role, user.approveTime, user.requestStatus == 101 ? `<div class="tb grn">New Request</div>` : user.requestStatus == 102 ? `<div class="tb bl">Approved</div>` : user.requestStatus == 104 ? `<div class="tb rd">Discarded</div>` : `<div class="tb">No Request</div>`, user.requestStatus == 102 ? `<button class="sbt ${user._id}" id="id:${i}" style="background: red" onclick="discardRequest(${i})">Discard</button>` : `<button class="sbt ${user._id}" id="id:${i}" onclick="approveRequest(${i})">Approve</button>`])   
                 })

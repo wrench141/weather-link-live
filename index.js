@@ -32,7 +32,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.get("/", (req, res) => res.render("index.ejs"));
 app.get("/login", (req, res) => res.render("login.ejs"));
 app.get("/register", (req, res) => res.render("register.ejs"));
-app.get("/users", checkRole("admin"), (req, res) => res.render("users.ejs"));
+app.get("/users", (req, res) => res.render("users.ejs"));
 app.get("/history", (req, res) => res.render("history.ejs"));
 
 app.get("/api/current", async (req, res) => {
@@ -150,7 +150,7 @@ app.get("/api/history/:start/:end", tokenMiddleware, async (req, res) => {
 const PORT = process.env.PORT || 3500;
 mongoose.connect(MDB_URI).then(() => {
   app.listen(PORT, () => {
-    console.log(`Worker ${process.pid} started on port ${PORT}`);
+    console.log(`server started on port ${PORT}`);
   });
 }).catch((e) => {
   console.log(e)
