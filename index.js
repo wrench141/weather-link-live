@@ -48,78 +48,175 @@ app.get("/api/current", async (req, res) => {
 
       const finalData = {
         temp: {
-        temp_1: fTocConver(response.data.sensors[2].data[0].temp_in),
-        temp_2: fTocConver(response.data.sensors[3].data[0].temp),
-        temp_3: fTocConver(response.data.sensors[6].data[0].temp),
-
-        wet_bulb_1: fTocConver(response.data.sensors[3].data[0].wet_bulb),
-        wet_bulb_2: fTocConver(response.data.sensors[6].data[0].wet_bulb),
-
-        wind_chill: fTocConver(response.data.sensors[3].data[0].wind_chill),
-
-        dew_point_1: fTocConver(response.data.sensors[3].data[0].dew_point),
-        dew_point_2: fTocConver(response.data.sensors[6].data[0].dew_point),
-      },
-      wind: {
-        speed: {
-          current: response.data.sensors[3].data[0].wind_speed_last,
-          high: response.data.sensors[3].data[0].wind_speed_hi_last_10_min,
+          temp_1: fTocConver(response.data.sensors[2].data[0].temp_in),
+          temp_2: fTocConver(response.data.sensors[3].data[0].temp),
+          temp_3: fTocConver(response.data.sensors[6].data[0].temp),
+          temp_highest: fTocConver(
+            Math.max(
+              response.data.sensors[2].data[0].temp_in,
+              response.data.sensors[3].data[0].temp,
+              response.data.sensors[6].data[0].temp
+            )
+          ),
+          temp_lowest: fTocConver(
+            Math.min(
+              response.data.sensors[2].data[0].temp_in,
+              response.data.sensors[3].data[0].temp,
+              response.data.sensors[6].data[0].temp
+            )
+          ),
+          wet_bulb_1: fTocConver(response.data.sensors[3].data[0].wet_bulb),
+          wet_bulb_2: fTocConver(response.data.sensors[6].data[0].wet_bulb),
+          wet_bulb_highest: fTocConver(
+            Math.max(
+              response.data.sensors[3].data[0].wet_bulb,
+              response.data.sensors[6].data[0].wet_bulb
+            )
+          ),
+          wet_bulb_lowest: fTocConver(
+            Math.min(
+              response.data.sensors[3].data[0].wet_bulb,
+              response.data.sensors[6].data[0].wet_bulb
+            )
+          ),
+          wind_chill: fTocConver(response.data.sensors[3].data[0].wind_chill),
+          dew_point_1: fTocConver(response.data.sensors[3].data[0].dew_point),
+          dew_point_2: fTocConver(response.data.sensors[6].data[0].dew_point),
+          dew_point_highest: fTocConver(
+            Math.max(
+              response.data.sensors[3].data[0].dew_point,
+              response.data.sensors[6].data[0].dew_point
+            )
+          ),
+          dew_point_lowest: fTocConver(
+            Math.min(
+              response.data.sensors[3].data[0].dew_point,
+              response.data.sensors[6].data[0].dew_point
+            )
+          ),
         },
-        direction: response.data.sensors[3].data[0].wind_dir_last,
-        avg_2min: response.data.sensors[3].data[0].wind_speed_avg_last_2_min,
-        avg_10min:
-          response.data.sensors[3].data[0].wind_speed_avg_last_10_min,
-      },
-      rain: {
-        total: response.data.sensors[3].data[0].rainfall_monthly_mm,
-        current: {
-          day: response.data.sensors[3].data[0].rainfall_daily_mm,
-          storm: response.data.sensors[3].data[0].rain_storm_mm,
-          rate: response.data.sensors[3].data[0].rain_rate_last_mm,
+        wind: {
+          speed: {
+            current: response.data.sensors[3].data[0].wind_speed_last,
+            high: response.data.sensors[3].data[0].wind_speed_hi_last_10_min,
+          },
+          direction: response.data.sensors[3].data[0].wind_dir_last,
+          avg_2min: response.data.sensors[3].data[0].wind_speed_avg_last_2_min,
+          avg_10min:
+            response.data.sensors[3].data[0].wind_speed_avg_last_10_min,
+          wind_highest: Math.max(
+            response.data.sensors[3].data[0].wind_speed_last,
+            response.data.sensors[3].data[0].wind_speed_hi_last_10_min
+          ),
+          wind_lowest: Math.min(
+            response.data.sensors[3].data[0].wind_speed_last,
+            response.data.sensors[3].data[0].wind_speed_avg_last_2_min,
+            response.data.sensors[3].data[0].wind_speed_avg_last_10_min
+          ),
         },
-        storm: response.data.sensors[3].data[0].rain_storm_last_mm,
-        month: response.data.sensors[3].data[0].rainfall_monthly_mm,
-        year: response.data.sensors[3].data[0].rainfall_year_mm,
-      },
-      humidity: {
-        outside: response.data.sensors[3].data[0].hum,
-        inside: response.data.sensors[2].data[0].hum_in,
-        airQuality: response.data.sensors[6].data[0].hum,
-      },
-      barometer: {
-        pressure: response.data.sensors[1].data[0].bar_absolute,
-        trend: response.data.sensors[1].data[0].bar_trend,
-      },
-      solarRadiation: response.data.sensors[3].data[0].solar_rad,
-      uvIndex: response.data.sensors[3].data[0].uv_index,
-      localForecast: {
-        sunrise: "5:22 AM",
-        sunset: "6:34 PM",
-      },
-      thwIndex: fTocConver(response.data.sensors[3].data[0].thw_index),
-      thswIndex: fTocConver(response.data.sensors[3].data[0].thsw_index),
-      insideTempHum: {
-        temp: fTocConver(response.data.sensors[2].data[0].temp_in),
-        humidity: response.data.sensors[2].data[0].hum_in,
-      },
-      airQuality: {
-        currentAQI: response.data.sensors[6].data[0].aqi_nowcast_val,
-        index: response.data.sensors[6].data[0].aqi_type,
-        particulateMatter: {
-          pm1: response.data.sensors[6].data[0].pm_1,
-          pm2p5: response.data.sensors[6].data[0].pm_2p5,
-          pm10: response.data.sensors[6].data[0].pm_10,
+        rain: {
+          total: response.data.sensors[3].data[0].rainfall_monthly_mm,
+          current: {
+            day: response.data.sensors[3].data[0].rainfall_daily_mm,
+            storm: response.data.sensors[3].data[0].rain_storm_mm,
+            rate: response.data.sensors[3].data[0].rain_rate_last_mm,
+          },
+          storm: response.data.sensors[3].data[0].rain_storm_last_mm,
+          month: response.data.sensors[3].data[0].rainfall_monthly_mm,
+          year: response.data.sensors[3].data[0].rainfall_year_mm,
+          rain_rate_highest: response.data.sensors[3].data[0].rain_rate_hi_mm,
         },
-        aqi_1hour: response.data.sensors[6].data[0].aqi_1_hour_val,
-        aqi_nowcast: response.data.sensors[6].data[0].aqi_nowcast_val,
-        aqi_24hour: response.data.sensors[6].data[0].aqi_val,
-      },
-      evapotranspiration: {
-        daily: response.data.sensors[3].data[0].et,
-        monthly: response.data.sensors[3].data[0].et_monthly,
-        yearly: response.data.sensors[3].data[0].et_yearly,
-      },
-    };
+        humidity: {
+          outside: response.data.sensors[3].data[0].hum,
+          inside: response.data.sensors[2].data[0].hum_in,
+          airQuality: response.data.sensors[6].data[0].hum,
+          humidity_highest: Math.max(
+            response.data.sensors[3].data[0].hum,
+            response.data.sensors[2].data[0].hum_in,
+            response.data.sensors[6].data[0].hum
+          ),
+          humidity_lowest: Math.min(
+            response.data.sensors[3].data[0].hum,
+            response.data.sensors[2].data[0].hum_in,
+            response.data.sensors[6].data[0].hum
+          ),
+        },
+        barometer: {
+          pressure: response.data.sensors[1].data[0].bar_absolute,
+          trend: response.data.sensors[1].data[0].bar_trend,
+          pressure_highest: Math.max(
+            response.data.sensors[1].data[0].bar_absolute,
+            response.data.sensors[1].data[0].bar_sea_level
+          ),
+          pressure_lowest: Math.min(
+            response.data.sensors[1].data[0].bar_absolute,
+            response.data.sensors[1].data[0].bar_sea_level
+          ),
+        },
+        solarRadiation: response.data.sensors[3].data[0].solar_rad,
+        uvIndex: response.data.sensors[3].data[0].uv_index,
+        localForecast: {
+          sunrise: "5:22 AM",
+          sunset: "6:34 PM",
+        },
+        thwIndex: fTocConver(response.data.sensors[3].data[0].thw_index),
+        thswIndex: fTocConver(response.data.sensors[3].data[0].thsw_index),
+        insideTempHum: {
+          temp: fTocConver(response.data.sensors[2].data[0].temp_in),
+          humidity: response.data.sensors[2].data[0].hum_in,
+        },
+        airQuality: {
+          currentAQI: response.data.sensors[6].data[0].aqi_nowcast_val,
+          index: response.data.sensors[6].data[0].aqi_type,
+          particulateMatter: {
+            pm1: response.data.sensors[6].data[0].pm_1,
+            pm2p5: response.data.sensors[6].data[0].pm_2p5,
+            pm10: response.data.sensors[6].data[0].pm_10,
+          },
+          aqi_1hour: response.data.sensors[6].data[0].aqi_1_hour_val,
+          aqi_nowcast: response.data.sensors[6].data[0].aqi_nowcast_val,
+          aqi_24hour: response.data.sensors[6].data[0].aqi_val,
+          aqi_highest: Math.max(
+            response.data.sensors[6].data[0].aqi_1_hour_val,
+            response.data.sensors[6].data[0].aqi_nowcast_val,
+            response.data.sensors[6].data[0].aqi_val
+          ),
+          aqi_lowest: Math.min(
+            response.data.sensors[6].data[0].aqi_1_hour_val,
+            response.data.sensors[6].data[0].aqi_nowcast_val,
+            response.data.sensors[6].data[0].aqi_val
+          ),
+          pm2p5_highest: Math.max(
+            response.data.sensors[6].data[0].pm_2p5,
+            response.data.sensors[6].data[0].pm_2p5_1_hour,
+            response.data.sensors[6].data[0].pm_2p5_3_hour,
+            response.data.sensors[6].data[0].pm_2p5_24_hour
+          ),
+          pm2p5_lowest: Math.min(
+            response.data.sensors[6].data[0].pm_2p5,
+            response.data.sensors[6].data[0].pm_2p5_1_hour,
+            response.data.sensors[6].data[0].pm_2p5_3_hour,
+            response.data.sensors[6].data[0].pm_2p5_24_hour
+          ),
+          pm10_highest: Math.max(
+            response.data.sensors[6].data[0].pm_10,
+            response.data.sensors[6].data[0].pm_10_1_hour,
+            response.data.sensors[6].data[0].pm_10_3_hour,
+            response.data.sensors[6].data[0].pm_10_24_hour
+          ),
+          pm10_lowest: Math.min(
+            response.data.sensors[6].data[0].pm_10,
+            response.data.sensors[6].data[0].pm_10_1_hour,
+            response.data.sensors[6].data[0].pm_10_3_hour,
+            response.data.sensors[6].data[0].pm_10_24_hour
+          ),
+        },
+        evapotranspiration: {
+          daily: response.data.sensors[3].data[0].et,
+          monthly: response.data.sensors[3].data[0].et_monthly,
+          yearly: response.data.sensors[3].data[0].et_yearly,
+        },
+      };
     res.status(200).json({ data: finalData });
   } catch (error) {
     console.log(error);
@@ -129,7 +226,7 @@ app.get("/api/current", async (req, res) => {
 
 app.post("/api/register", register)
 app.post("/api/login", login)
-app.get("/api/users", getAllUsers);
+// app.get("/api/users", getAllUsers);
 app.get("/api/approveRequest/:id", approveRequest);
 app.get("/api/discardRequest/:id", discardRequest);
 app.get("/api/history/:start/:end", tokenMiddleware, async (req, res) => {

@@ -10,10 +10,10 @@
 <body>
     <div class="container">
         <div class="strip">
-            <img src="./assets/01.png" alt="" class="img">
+            <img src="./assets/01.png" alt="-" class="img">
             <div class="grp">
-                <img src="./assets/BC.png" alt="" class="bc">
-                <img src="./assets/cuny.png" alt="" class="bc">
+                <img src="./assets/BC.png" alt="-" class="bc">
+                <img src="./assets/cuny.png" alt="-" class="bc">
             </div>
         </div>
         <div style="padding: 20px">
@@ -252,22 +252,22 @@
                     <p class="main-blg">During an interactive session, students from Vignan and CUNY expressed their views about the newly installed weather station which can stimulate new research ideas in them and can be used to develop projects in the field of climate and climate change to help the local community. Students were excited about this promising academic collaboration between the two countries.</p>
                     <p class="main-blg">The Vote of thanks was given by Mr. Yogesh Sambhana and Dr. Sirisha. K to conclude the inaugural session. </p>
                     <div class="images">
-                        <img src="./assets/img1.jpeg" alt="" class="img">
-                        <img src="./assets/img2.jpeg" alt="" class="img">
-                        <img src="./assets/img3.jpeg" alt="" class="img">
-                        <img src="./assets/img4.jpeg" alt="" class="img">
-                        <img src="./assets/img5.jpeg" alt="" class="img">
-                        <img src="./assets/img6.jpeg" alt="" class="img">
+                        <img src="./assets/img1.jpeg" alt="-" class="img">
+                        <img src="./assets/img2.jpeg" alt="-" class="img">
+                        <img src="./assets/img3.jpeg" alt="-" class="img">
+                        <img src="./assets/img4.jpeg" alt="-" class="img">
+                        <img src="./assets/img5.jpeg" alt="-" class="img">
+                        <img src="./assets/img6.jpeg" alt="-" class="img">
                     </div>
                     <p class="link">
-                        <span>Our Memorandum of understanding: </span> <a href="" class="h">http://vignaniit.edu.in/mou</a>
+                        <span>Our Memorandum of understanding: </span> <a href="-" class="h">http://vignaniit.edu.in/mou</a>
                     </p>
                 </div>
             </div>
         </div>
         <footer class="footer">
             <div class="col">
-                <!-- <img src="./assets/01.png" alt="" class="img"> -->
+                <!-- <img src="./assets/01.png" alt="-" class="img"> -->
                 <p class="ftitle" style="margin-bottom: 5px; font-size: 20px; font-weight: 800;">Vignan X BCC X CUNY</p>
                 <p class="ftitle">Vignan's IIT(A) - Vizag - Weather Monitoring System</p>
                 <p class="sub">A weather monitoring system for multi-purpose applications with historic data.</p>
@@ -293,7 +293,7 @@
             </div>
             <div class="col">
                 <p class="ftitle">Contact us</p>
-                <textarea name="" placeholder="Your Feedback..." class="txtArea" rows="5"></textarea>
+                <textarea name="-" placeholder="Your Feedback..." class="txtArea" rows="5"></textarea>
                 <div class="row">
                     <input type="email" class="inp" placeholder="Your Email">
                     <button class="btn">Send</button>
@@ -308,6 +308,7 @@
     <!-- weather dashboard script  -->
     <script>
         const getBarometerData = async(currentDate) => {
+            console.log(currentDate)
             try {
                 const response = await axios.get(
                     `http://viit-weather.ddns.net:5000/api/weather?start_date=${currentDate}&start_time=00:00&end_date=${currentDate}&end_time=23:00`, 
@@ -351,9 +352,6 @@
                     }
                     console.log(count);
                 })
-                // response_data.forEach((data) => {
-                //     console.log(data)
-                // })
 
 
             } catch (error) {
@@ -375,6 +373,7 @@
                     }
                 }).then(resp => resp.json().then((data) => {
                     const d = data.data;
+                    console.log(d)
 
                     const temp = [d.temp.temp_1, d.temp.wind_chill, 35, d.temp.wet_bulb_1, d.temp.dew_point_1].map((temps) => {
                         return Math.round((temps * 200)/100)
@@ -397,23 +396,23 @@
                     setTHSW(d.thswIndex);
 
                     //table parameters
-                    createRow("prim", ["Temperature", d.temp.temp_1, "", ""])
-                    createRow("prim", ["Windchill", d.temp.wind_chill, "", ""])
-                    createRow("prim", ["Wet Bulb", d.temp.wet_bulb_1, "", ""])
-                    createRow("prim", ["Dew Point", d.temp.dew_point_1, "", ""])
-                    createRow("prim", ["Wind speed", d.wind.speed.current+"kmph", d.wind.speed.high+"kmph", ""])
-                    createRow("prim", ["Humidity", d.humidity.outside+"%", "", ""])
-                    createRow("prim", ["UV", d.uvIndex, "", ""])
-                    createRow("prim", ["Wind Direction", d.wind.direction+"°", "", ""])
-                    createRow("prim", ["Air quality Index", d.airQuality.currentAQI, "", ""])
-                    createRow("prim", ["Particulate Matter", d.airQuality.particulateMatter.pm1, "", ""])
-                    createRow("prim", ["Solar Radiation", d.solarRadiation, "", ""])
+                    createRow("prim", ["Temperature", d.temp.temp_1, d.temp.temp_highest, d.temp.temp_lowest])
+                    createRow("prim", ["Windchill", d.temp.wind_chill, "-", "-"])
+                    createRow("prim", ["Wet Bulb", d.temp.wet_bulb_1, "-", "-"])
+                    createRow("prim", ["Dew Point", d.temp.dew_point_1, "-", "-"])
+                    createRow("prim", ["Wind speed", d.wind.speed.current+"kmph", d.wind.speed.high+"kmph", "-"])
+                    createRow("prim", ["Humidity", d.humidity.outside+"%", "-", "-"])
+                    createRow("prim", ["UV", d.uvIndex, "-", "-"])
+                    createRow("prim", ["Wind Direction", d.wind.direction+"°", "-", "-"])
+                    createRow("prim", ["Air quality Index", d.airQuality.currentAQI, "-", "-"])
+                    createRow("prim", ["Particulate Matter", d.airQuality.particulateMatter.pm1, "-", "-"])
+                    createRow("prim", ["Solar Radiation", d.solarRadiation, "-", "-"])
                     
                     //wind params
                     createRow("windTab", ["Avg Wind speed", d.wind.avg_2min+"kmph", d.wind.avg_10min+"kmph"])
                     
                     //aqi
-                    createRow("aqi", ["Avg Wind speed", d.wind.avg_2min+"kmph", d.wind.avg_10min+"kmph", d.wind.avg_10min+"kmph"])
+                    createRow("aqi", ["Air Quality Index", (d.airQuality.aqi_1hour).toFixed(2)+"kmph", (d.airQuality.aqi_nowcast).toFixed(2)+"kmph", (d.airQuality.aqi_24hour).toFixed(2)+"kmph"])
 
                 }))    
             } catch (error) {
@@ -558,7 +557,7 @@
 
         const auth = document.getElementById("auth");
         const token = window.localStorage.getItem("token");
-        if(token == null || token == ""){
+        if(token == null || token == "-"){
             auth.setAttribute("href", "/login");
             auth.textContent = "Login"
         }else{
