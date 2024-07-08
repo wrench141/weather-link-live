@@ -365,7 +365,7 @@
 
         const getCurrentData = async() => {
             try {
-                fetch("http://localhost:3500/api/current",{
+                fetch("/api/current",{
                     method: "GET",
                     headers: {
                         contentType: "Application/json"
