@@ -421,7 +421,7 @@ body{
     padding: 0 15px;
     font-size: 12px;
     word-wrap: nowrap;
-    text-wrap: nowrap;
+    /* text-wrap: nowrap; */
     text-transform: capitalize;
 }
 
@@ -717,4 +717,76 @@ body{
 
 .hide{
     display: none;
+}
+
+.graph-container.bm{
+    min-width: max-content;
+    padding-right: 40px;
+}
+
+.rrGrid.hist{
+    grid-template-columns: 250px 1fr;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .container{
+        overflow: hidden;
+    }
+    .container .strip{
+        width: 100%;
+        height: max-content;
+        flex-direction: column;
+        gap: 0;
+    }
+    .container .img{
+        width: 100%;
+        height: auto;
+    }
+    .container .strip .grp{
+        width: 100%;
+        padding: 0 20px;
+        background-color: #67a6ff;
+    }
+    .container .strip .grp .bc{
+        width: 40%;
+        height: auto;
+        filter: invert();
+    }
+    .container .main-sub{
+        width: 90%;
+    }
+    .container .navigation{
+        width: 100%;
+        overflow-x: scroll;
+    }
+    .container .navigation .link.sel{
+        text-wrap: nowrap;
+        word-wrap: nowrap;
+        height: max-content;
+    }
+    .rrGrid, .rrGrid.hist{
+        grid-template-columns: 1fr;
+    }
+    .acc-container{
+        max-width: 100%;
+        min-width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .footer{
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .graph-container.bm{
+        min-width: 100%;
+        max-width: 100%;
+        overflow-x: scroll;
+        overflow-y: hidden;
+    }
+    .blog .center{
+        width: 100%;
+    }
 }

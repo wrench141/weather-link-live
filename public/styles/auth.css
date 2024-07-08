@@ -178,3 +178,53 @@ body {
     border-radius: 50%;
     background-color: #6f6fff;
 }
+
+
+@media only screen and (max-width: 600px) {
+    .container {
+            overflow: hidden;
+        }
+    
+    .container .strip {
+        width: 100%;
+        height: max-content;
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .container .img {
+        width: 100%;
+        height: auto;
+    }
+
+    .container .strip .grp {
+        width: 100%;
+        padding: 0 20px;
+        background-color: #67a6ff;
+    }
+
+    .container .strip .grp .bc {
+        width: 40%;
+        height: auto;
+        filter: invert();
+    }
+
+    .container .main-sub {
+        width: 90%;
+    }
+
+    .container .navigation {
+        width: 100%;
+        overflow-x: scroll;
+    }
+
+    .container .navigation .link.sel {
+        text-wrap: nowrap;
+        word-wrap: nowrap;
+        height: max-content;
+    }
+    .filters{
+        width: 100%;
+        padding: 0 20px;
+    }
+}
