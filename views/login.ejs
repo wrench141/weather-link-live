@@ -45,7 +45,7 @@
             const email = document.getElementById("email");
             const pass = document.getElementById("pass");
             
-            if(email != "" || pass != ""){
+            if(email != "" && pass != ""){
                     document.getElementById("sub").textContent = "Fields can't be empty";
                     email.classList.add("err");
                     pass.classList.add("err");
