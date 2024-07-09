@@ -508,6 +508,7 @@ body{
     color: var(--sub);
     font-size: 14px;
     width: 100%;
+    text-align: justify;
     margin-top: 20px;
 }
 
