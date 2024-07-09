@@ -44,28 +44,38 @@
         const submitHandler = async() => {
             const email = document.getElementById("email");
             const pass = document.getElementById("pass");
-            await axios.post("/api/login", {
-                email: email.value,
-                password: pass.value
-            }).then((response) => {
-                console.log(response);
-                email.setAttribute("disabled", true);
-                pass.setAttribute("disabled", true);
-                btn.textContent = response.data.msg;
-                email.classList.remove("err");
-                pass.classList.remove("err");
-                document.getElementById("sub").textContent = "";
-                if(response.data.code == 102){
-                    window.localStorage.setItem("token", response.data.token)
-                    setTimeout(() => {
-                        window.location.href = "/"
-                    }, 2000)
-                }
-            }).catch((error) => {
-                document.getElementById("sub").textContent = error.response.data.msg;
-                email.classList.add("err");
-                pass.classList.add("err");
-            })
+            
+            if(email != "" || pass != ""){
+                    document.getElementById("sub").textContent = "Fields can't be empty";
+                    email.classList.add("err");
+                    pass.classList.add("err");
+                    btn.innerHTML = "Login"
+            }else{
+                btn.innerHTML = "<div class='circle'></div>"
+                await axios.post("/api/login", {
+                    email: email.value,
+                    password: pass.value
+                }).then((response) => {
+                    console.log(response);
+                    email.setAttribute("disabled", true);
+                    pass.setAttribute("disabled", true);
+                    btn.textContent = response.data.msg;
+                    email.classList.remove("err");
+                    pass.classList.remove("err");
+                    document.getElementById("sub").textContent = "";
+                    if(response.data.code == 102){
+                        window.localStorage.setItem("token", response.data.token)
+                        setTimeout(() => {
+                            window.location.href = "/"
+                        }, 2000)
+                    }
+                }).catch((error) => {
+                    document.getElementById("sub").textContent = error.response.data.msg;
+                    email.classList.add("err");
+                    pass.classList.add("err");
+                    btn.innerHTML = "Login"
+                })
+            }
         };
         btn.addEventListener("click", submitHandler);
         window.addEventListener("keypress", (e) => {

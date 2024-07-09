@@ -39,24 +39,32 @@
         const btn = document.getElementById("req");
         btn.addEventListener("click", async() => {
             const email = document.getElementById("email");
-            await axios.post("/api/register", {
-                email: email.value,
-            }).then((response) => {
-                console.log(response);
-                email.setAttribute("disabled", true);
-
-                btn.textContent = response.data.msg;
-                
-                email.classList.remove("err");
-
-                document.getElementById("sub").textContent = "";
-                setTimeout(() => {
-                    window.location.href = "/"
-                }, 2000)
-            }).catch((error) => {
-                document.getElementById("sub").textContent = error.response.data.msg;
+            btn.innerHTML = '<div class="circle"></div>'
+            if(email.value != ""){
+                await axios.post("/api/register", {
+                    email: email.value,
+                }).then((response) => {
+                    console.log(response);
+                    email.setAttribute("disabled", true);
+                    
+                    btn.textContent = response.data.msg;
+                    
+                    email.classList.remove("err");
+                    
+                    document.getElementById("sub").textContent = "";
+                    setTimeout(() => {
+                        window.location.href = "/"
+                    }, 2000)
+                }).catch((error) => {
+                    document.getElementById("sub").textContent = error.response.data.msg;
+                    btn.innerHTML = 'Request Register'
+                    email.classList.add("err");
+                })
+            }else{
+                document.getElementById("sub").textContent = "Fields Can't be Empty";
+                btn.innerHTML = 'Request Register'
                 email.classList.add("err");
-            })
+            }
         })
     </script>
 </body>

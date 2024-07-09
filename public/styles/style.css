@@ -95,6 +95,8 @@ body{
     cursor: pointer;
     text-decoration: none;
     color: black;
+    word-wrap: nowrap;
+    text-wrap: nowrap;
     background-color: transparent;
     font-family: "Public Sans";
 }
