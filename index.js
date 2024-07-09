@@ -226,7 +226,7 @@ app.get("/api/current", async (req, res) => {
 
 app.post("/api/register", register)
 app.post("/api/login", login)
-// app.get("/api/users", getAllUsers);
+app.get("/api/users", getAllUsers);
 app.get("/api/approveRequest/:id", approveRequest);
 app.get("/api/discardRequest/:id", discardRequest);
 app.get("/api/history/:start/:end", tokenMiddleware, async (req, res) => {
