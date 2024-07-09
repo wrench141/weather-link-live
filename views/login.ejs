@@ -44,13 +44,9 @@
         const submitHandler = async() => {
             const email = document.getElementById("email");
             const pass = document.getElementById("pass");
+            console.log(email.value, pass.value)
             
-            if(email != "" && pass != ""){
-                    document.getElementById("sub").textContent = "Fields can't be empty";
-                    email.classList.add("err");
-                    pass.classList.add("err");
-                    btn.innerHTML = "Login"
-            }else{
+            if(email.value != "" && pass.value != ""){
                 btn.innerHTML = "<div class='circle'></div>"
                 await axios.post("/api/login", {
                     email: email.value,
@@ -75,6 +71,11 @@
                     pass.classList.add("err");
                     btn.innerHTML = "Login"
                 })
+            }else{
+                document.getElementById("sub").textContent = "Fields can't be empty";
+                email.classList.add("err");
+                pass.classList.add("err");
+                btn.innerHTML = "Login"
             }
         };
         btn.addEventListener("click", submitHandler);
