@@ -22,8 +22,6 @@
             <div class="navigation" id="navigation">
                 <span class="link sel">Dashboard</span>
                 <a href="/" class="link">Live Forecast</a>
-                <span class="link">History</span>
-                <span class="link">Blog</span>
             </div>
             <div id="weather-render">
                 <div class="rrGrid" id="filter">
@@ -84,10 +82,13 @@
     <!-- weather dashboard script  -->
     <script>
 
-        console.log("ji admin")
         const getCurrentData = async() => {
             try {
-                await axios.get("/api/users").then((response) => {
+                await axios.get("/api/users", {
+                    headers:{
+                        token: window.localStorage.getItem("token")
+                    }
+                }).then((response) => {
                 const data = response.data.msg;
                 console.log(data)
                 data.map((user, i) => {
@@ -103,18 +104,22 @@
         }
 
         const approveRequest = async(id) => {
-            const userId = document.getElementById(`id:${id}`).classList[1];
-            await axios.get(`/api/approveRequest/${userId}`).then((resp) => {
+            const userId = document.getElementById(`id:${id}`);
+            userId.innerHTML = "<div class='circle'></div>";
+            await axios.get(`/api/approveRequest/${userId.classList[1]}`).then((resp) => {
                 console.log(resp.data);
                 window.location.reload()
             })
+            userId.innerHTML = "Approve";
         }
         const discardRequest = async(id) => {
-            const userId = document.getElementById(`id:${id}`).classList[1];
-            await axios.get(`/api/discardRequest/${userId}`).then((resp) => {
+            const userId = document.getElementById(`id:${id}`);
+            userId.innerHTML = "<div class='circle'></div>";
+            await axios.get(`/api/discardRequest/${userId.classList[1]}`).then((resp) => {
                 console.log(resp.data);
                 window.location.reload()
             })
+            userId.innerHTML = "Discard";
         }
 
         function createRow(id, data) {

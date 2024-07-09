@@ -669,14 +669,34 @@ body{
 }
 
 .sbt{
-    width: max-content;
-    height: max-content;
+    width: 100px;
+    height: 30px;
     padding: 5px 10px;
     background-color: #1576ff;
     color: white;
     font-family: "Public Sans";
     border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 5px;
+}
+
+.sbt .circle{
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border-right: 2px solid white;
+    border-top: 2px solid white;
+    animation: load 0.5s ease-out infinite;
+}
+
+@keyframes load {
+    from{
+        transform: rotate(0deg);
+    }to{
+        transform: rotate(360deg);
+    }
 }
 
 .tb{
