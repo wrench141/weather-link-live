@@ -733,6 +733,10 @@ body{
     .container{
         overflow: hidden;
     }
+    .tab-col{
+        width: 100%;
+        overflow-x: scroll;
+    }
     .container .strip{
         width: 100%;
         height: max-content;
