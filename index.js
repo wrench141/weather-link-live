@@ -231,15 +231,21 @@ app.get("/api/approveRequest/:id", approveRequest);
 app.get("/api/discardRequest/:id", discardRequest);
 app.get("/api/history/:start/:end", tokenMiddleware, async (req, res) => {
   try {
-    const { start, end } = req.params;
-    const response = await axios.get(`${process.env.STATION_API}?start_date=${start}&start_time=00:00&end_date=${end}&end_time=23:00`);
-    if(response.status == 200){
-      res.status(200).json({ data: response.data , code: 103 });
-    }else{
-      res.status(500).json({ msg: "Server timeout, Please try again" });
+    let { start, end } = req.params;
+    for (let i = 0; i < 7; i++) {
+      const response = await axios.get(`${process.env.STATION_API}?start_date=${start}&start_time=00:00&end_date=${end}&end_time=23:00`);
+      if (response.status === 200) {
+        if (response.data.length > 0) {
+          return res.status(200).json({ data: response.data, code: 103 });
+        }
+        start = new Date(new Date(start).setDate(new Date(start).getDate() - 1)).toISOString().split('T')[0];
+      } else {
+        return res.status(500).json({ msg: "Server timeout, Please try again" });
+      }
     }
+    res.status(404).json({ msg: "No data found for the given date range and previous dates", code: 104 });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res.status(500).json({ msg: "server error" });
   }
 });
