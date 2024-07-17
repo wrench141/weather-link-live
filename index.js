@@ -3,13 +3,13 @@ const express = require("express");
 // const cluster = require("cluster");
 // const numCPUs = require("os").cpus().length;
 const mongoose = require("mongoose");
+require("dotenv").config()
 
-const API_URI = "https://api.weatherlink.com/v2/";
-const API_KEY = "wmrdzimw9fwlpo1mr81s9uuf1xhaqezu";
-const API_SECRET = "jr0uy8mkraiw1rzrueajrvgvuijxnx7l";
-const STID = 149767;
-const MDB_PASS = "qzWeMKgobx3UeSM0";
-const MDB_URI = `mongodb+srv://sidhardhchandra141:${MDB_PASS}@cluster0.aha7svt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
+const API_URI = process.env.API_URI
+const API_KEY = process.env.API_KEY
+const API_SECRET = process.env.API_SECRET
+const STID = process.env.STID
+const MDB_URI = process.env.MDB_URI
 
 const cors = require("cors");
 const path = require("path");
@@ -232,7 +232,7 @@ app.get("/api/discardRequest/:id", discardRequest);
 app.get("/api/history/:start/:end", tokenMiddleware, async (req, res) => {
   try {
     const { start, end } = req.params;
-    const response = await axios.get(`${process.env.STAION_API}?start_date=${start}&start_time=00:00&end_date=${end}&end_time=23:00`);
+    const response = await axios.get(`${process.env.STATION_API}?start_date=${start}&start_time=00:00&end_date=${end}&end_time=23:00`);
     if(response.status == 200){
       res.status(200).json({ data: response.data , code: 103 });
     }else{
