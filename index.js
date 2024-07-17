@@ -232,7 +232,7 @@ app.get("/api/discardRequest/:id", discardRequest);
 app.get("/api/history/:start/:end", tokenMiddleware, async (req, res) => {
   try {
     const { start, end } = req.params;
-    const response = await axios.get(`http://viit-weather.ddns.net:5000/api/weather?start_date=${start}&start_time=00:00&end_date=${end}&end_time=23:00`);
+    const response = await axios.get(`${process.env.STAION_API}?start_date=${start}&start_time=00:00&end_date=${end}&end_time=23:00`);
     if(response.status == 200){
       res.status(200).json({ data: response.data , code: 103 });
     }else{
