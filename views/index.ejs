@@ -381,7 +381,6 @@
                     }
                 }).then(resp => resp.json().then((data) => {
                     const d = data.data;
-                    console.log(d)
 
                     const og_temp = [d.temp.temp_1, d.temp.wind_chill, 35, d.temp.wet_bulb_1, d.temp.dew_point_1]
                     const temp = og_temp.map((temps) => {
@@ -446,7 +445,6 @@
 
                 }))
             } catch (error) {
-                console.log(error)
             }
         }
 
@@ -593,14 +591,13 @@
         const getBarometerData = async (currentDate) => {
             try {
                 const response = await axios.get(
-                    `/api/history/${currentDate}/${currentDate}`,
-                    { crossDomain: true }
-                );
-
-                const weatherData = response.data;
+                    `/api/history/${currentDate}/${currentDate}`, {
+                    headers: {token: window.localStorage.getItem("token")}
+                });
+                const weatherData = response.data.data;
                 const currentTime = parseInt((new Date()).toTimeString().split(" ")[0].split(":")[0]);
                 const timeHrs = Array.from({ length: 10 }, (_, i) => (currentTime - i + 6) % 24);
-
+                
                 const result = {};
                 timeHrs.forEach((time) => {
                     result[time.toString()] = [];
@@ -618,10 +615,8 @@
                     result[time] = result[time].length > 0 ? result[time].reduce((acc, val) => acc + val, 0) / result[time].length : null;
                 });
 
-                console.log(Object.keys(result), result);
                 renderBarometer(Object.values(result), Object.keys(result));
             } catch (error) {
-                console.log(error);
             }
         };
 

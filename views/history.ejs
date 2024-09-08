@@ -167,7 +167,6 @@
                 if(response.status == 200){  
                     document.getElementById("loader").classList.add("hide")
                     document.getElementById("dummy").classList.add("hide");
-                    console.log(response)
                     response?.data.data.forEach((data, i) => {
                         if(i < 10){
                             createTableRows(data);
@@ -175,7 +174,6 @@
                     });
                 }                    
             } catch (error) {
-                console.log(error);
             }
         }
 
@@ -198,7 +196,6 @@
         window.addEventListener("load", () => {
             const startDate = (new Date()).toISOString().split("T")[0].split("-").map((item, i) => {
                 if(i == 2){
-                    console.log(item);
                     let date = (parseInt(item) - 1);
                     if(date < 9){
                         date = "0" + date;
