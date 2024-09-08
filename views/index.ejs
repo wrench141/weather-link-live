@@ -593,7 +593,7 @@
         const getBarometerData = async (currentDate) => {
             try {
                 const response = await axios.get(
-                    `http://103.176.255.85:1506/api/weather?start_date=${currentDate}&start_time=00:00&end_date=${currentDate}&end_time=23:00`,
+                    `https://103.176.255.85:1506/api/weather?start_date=${currentDate}&start_time=00:00&end_date=${currentDate}&end_time=23:00`,
                     { crossDomain: true }
                 );
 
