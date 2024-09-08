@@ -218,6 +218,16 @@ body{
     width: 100%;
     border-radius: 5px;
     background: linear-gradient(to top, #6272ff, #1576ff);
+    display: flex;
+    align-items: center;
+    color: white;
+    text-align: center;
+    justify-content: center;
+    font-size: 11px
+}
+
+.graph .graphs .bars .bar.rd .level{
+    background: linear-gradient(to top, #62e2ff, #15d4ff);
 }
 
 .acc-container{
@@ -312,7 +322,6 @@ body{
 .acc-container .flow{
     width: 200px;
     height: 200px;
-    background-color: #1576ff;
     border-radius: 50%;
     margin: 30px 0;
     position: relative;
