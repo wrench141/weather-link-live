@@ -39,6 +39,8 @@ const login = async (req, res) => {
             if(passCheck){
                 console.log(process.env.SALT);
                 let token = jwt.sign(existingUser.email, process.env.SALT);
+                existingUser.requestStatus = 102;
+                await existingUser.save()
                 res
                   .status(200)
                   .json({ msg: "Logged in", code: 102, token });

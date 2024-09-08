@@ -254,6 +254,7 @@ const PORT = process.env.PORT || 3500;
 mongoose.connect(MDB_URI).then(() => {
   app.listen(PORT, () => {
     console.log(`server started on port ${PORT}`);
+    console.log(`http://localhost:${PORT}/`)
   });
 }).catch((e) => {
   console.log(e)

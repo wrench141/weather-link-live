@@ -413,7 +413,7 @@
                     renderBarGraph("rain", rainData);
                     renderBarGraph("aq", aqData);
                     windAtribs(d.wind.speed, d.wind.direction)
-                    setHumidity(d.humidity.outside);
+                    setHumidity(d.humidity.outside || d.humidity.inside);
                     setTHSW(d.thswIndex);
 
                     //table parameters
@@ -422,7 +422,7 @@
                     createRow("prim", ["Wet Bulb", d.temp.wet_bulb_1, "-", "-"])
                     createRow("prim", ["Dew Point", d.temp.dew_point_1, "-", "-"])
                     createRow("prim", ["Wind speed", d.wind.speed.current+"kmph", d.wind.speed.high+"kmph", "-"])
-                    createRow("prim", ["Humidity", d.humidity.outside+"%", "-", "-"])
+                    createRow("prim", ["Humidity", d.humidity.outside || d.humidity.inside+"%", "-", "-"])
                     createRow("prim", ["UV", d.uvIndex, "-", "-"])
                     createRow("prim", ["Wind Direction", d.wind.direction+"°", "-", "-"])
                     createRow("prim", ["Air quality Index", d.airQuality.currentAQI, "-", "-"])
